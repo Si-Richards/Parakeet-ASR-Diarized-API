@@ -1,0 +1,24 @@
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+pydantic==2.10.3
+pydantic-settings==2.6.1
+
+python-multipart==0.0.17
+orjson==3.10.12
+
+# audio
+soundfile==0.12.1
+numpy==1.26.4
+
+# ML
+torch==2.5.1
+torchaudio==2.5.1
+
+# Parakeet via NeMo
+nemo_toolkit[asr]==2.4.0
+
+# Diarization
+pyannote.audio==3.1.1
+
+# Optional but useful: to download gated HF models reliably
+huggingface_hub==0.26.2

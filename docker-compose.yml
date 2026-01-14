@@ -1,0 +1,29 @@
+services:
+  asr-api:
+    build: .
+    container_name: asr-parakeet-diarize-api
+    ports:
+      - "8010:8000"
+    environment:
+      LOG_LEVEL: "INFO"
+      DEVICE: "cuda"
+      MAX_CONCURRENT_REQUESTS: "1"
+      MAX_UPLOAD_MB: "200"
+
+      # Required for diarization (pyannote gated models)
+      HF_TOKEN: "${HF_TOKEN}"
+
+      # Persistent caches
+      NEMO_CACHE_DIR: "/models/nemo"
+      HF_HOME: "/models/hf"
+      TMP_DIR: "/tmp/asr"
+    volumes:
+      - ./models/nemo:/models/nemo
+      - ./models/hf:/models/hf
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
