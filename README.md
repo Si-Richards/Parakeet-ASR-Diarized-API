@@ -65,15 +65,3 @@ Operational notes
 This service uses a semaphore (MAX_CONCURRENT_REQUESTS) to avoid GPU VRAM thrash.
 
 For large files, enforce limits in your reverse proxy as well (e.g. nginx client_max_body_size).
-
-
----
-
-### What you’ll likely want next (based on your “summary service” style)
-
-1) **Return format parity**: if your summary API already returns `request_id`, `processing_ms`, etc., I can mirror that exactly.  
-2) **Queueing**: if you want >1 inbound concurrency but only 1 GPU worker, we can add an internal queue (or Redis/Celery) so callers don’t blow VRAM.  
-3) **Telephony defaults**: if your inputs are mostly 8kHz mono, we can optimize conversion and chunking for long calls.
-
-If you paste your current “summary webservice” folder structure (or just its `main.py` + config) I’ll reshape the above to match it *exactly* (routes, response schema, logging, folders).
-::contentReference[oaicite:4]{index=4}
